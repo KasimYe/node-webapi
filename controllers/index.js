@@ -20,10 +20,10 @@ var fn_signin = async (ctx, next) => {
         <p><a href="/">Try again</a></p>`;
     } else {        
         var user = await User.create({
-            name: name,
-            gender: false,
-            email: name + '-' + Date.now() + '@garfield.pet',
-            passwd: password
+            storeID: 1,
+            userName: name,
+            loginID: name + '-' + Date.now() + '@garfield.pet',
+            password: password
         });
         console.log('created: ' + JSON.stringify(user));
         ctx.response.body = `<h1>Welcome, ${name}!</h1>`;
