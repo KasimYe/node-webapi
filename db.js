@@ -1,14 +1,14 @@
 const Sequelize = require('sequelize');
 
-const uuid = require('node-uuid');
+// const uuid = require('node-uuid');
 
 const config = require('./config');
 
 console.log('init sequelize...');
 
-function generateId() {
-    return uuid.v4();
-}
+// function generateId() {
+//     return uuid.v4();
+// }
 
 var sequelize = new Sequelize(config.database, config.username, config.password, {
     host: config.host,
@@ -21,7 +21,7 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
     }
 });
 
-const ID_TYPE = Sequelize.STRING(50);
+// const ID_TYPE = Sequelize.STRING(50);
 
 function defineModel(name, attributes) {
     var attrs = {};
@@ -37,22 +37,22 @@ function defineModel(name, attributes) {
             };
         }
     }
-    attrs.id = {
-        type: ID_TYPE,
-        primaryKey: true
-    };
-    attrs.createdAt = {
-        type: Sequelize.BIGINT,
-        allowNull: false
-    };
-    attrs.updatedAt = {
-        type: Sequelize.BIGINT,
-        allowNull: false
-    };
-    attrs.version = {
-        type: Sequelize.BIGINT,
-        allowNull: false
-    };
+    // attrs.id = {
+    //     type: ID_TYPE,
+    //     primaryKey: true
+    // };
+    // attrs.createdAt = {
+    //     type: Sequelize.BIGINT,
+    //     allowNull: false
+    // };
+    // attrs.updatedAt = {
+    //     type: Sequelize.BIGINT,
+    //     allowNull: false
+    // };
+    // attrs.version = {
+    //     type: Sequelize.BIGINT,
+    //     allowNull: false
+    // };
     //console.log(JSON.stringify(config));
     console.log('model defined for table: ' + name + '\n' + JSON.stringify(attrs, function (k, v) {
         if (k === 'type') {
@@ -84,16 +84,16 @@ function defineModel(name, attributes) {
                 let now = Date.now();
                 if (obj.isNewRecord) {
                     console.log('will create entity...' + obj);
-                    if (!obj.id) {
-                        obj.id = generateId();
-                    }
-                    obj.createdAt = now;
-                    obj.updatedAt = now;
-                    obj.version = 0;
+                    // if (!obj.id) {
+                    //     obj.id = generateId();
+                    // }
+                    // obj.createdAt = now;
+                    // obj.updatedAt = now;
+                    // obj.version = 0;
                 } else {
                     console.log('will update entity...');
-                    obj.updatedAt = now;
-                    obj.version++;
+                    // obj.updatedAt = now;
+                    // obj.version++;
                 }
             }
         }
@@ -118,7 +118,7 @@ for (let type of TYPES) {
     exp[type] = Sequelize[type];
 }
 
-exp.ID = ID_TYPE;
-exp.generateId = generateId;
+// exp.ID = ID_TYPE;
+// exp.generateId = generateId;
 
 module.exports = exp;

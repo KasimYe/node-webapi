@@ -1,17 +1,23 @@
 const users = require('../data/users');
-
+const menus = require('../data/menus');
 const APIError = require('../rest').APIError;
 
 module.exports = {
-    'GET /api/users': async (ctx, next) => {        
+    'GET /api/users': async (ctx, next) => {
         ctx.rest({
             users: await users.getUsers()
         });
     },
 
-    'GET /api/users/:id': async (ctx, next) => {        
+    'POST /api/users': async (ctx, next) => {
         ctx.rest({
-            users: await users.getUser(ctx.params.id)
+            users: await users.getUser(ctx.request.body.loginid)
+        });
+    },
+
+    'POST /api/menus': async (ctx, next) => {
+        ctx.rest({
+            menus: await menus.getMenus()
         });
     },
 
