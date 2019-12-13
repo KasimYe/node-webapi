@@ -17,7 +17,7 @@ module.exports = {
 
     'POST /api/menus': async (ctx, next) => {
         ctx.rest({
-            menus: await menus.getMenus()
+            menus: await menus.getMenus(ctx.request.body.userid)
         });
     },
 

@@ -1,10 +1,12 @@
 var config = {
-    dialect: 'mssql',       //mysql'|'mariadb'|'sqlite'|'postgres'|'mssql'
-    database: 'HY_WMS',
-    username: 'sa',
-    password: 'YvNctoP0hFpCcgwKvJlcYM0tSQ8nqNAs',
-    host: '101.37.35.29',
-    port: 1433
+    dialect: 'mysql',       //mysql'|'mariadb'|'sqlite'|'postgres'|'mssql'
+    database: 'healthpublic',
+    username: 'www',
+    password: 'www',
+    host: 'localhost',
+    port: 3306
 };
 
 module.exports = config;
+
+//grant all privileges on healthpublic.* to 'www'@'%' identified by 'www';

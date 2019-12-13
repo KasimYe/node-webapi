@@ -1,9 +1,8 @@
 const entity = require('./../model');
 let Menu = entity.Menu;
-let MenuRFMenu=entity.MenuRFMenu;
 
 module.exports = {
-    getMenus: () => {       
+    getMenus: (id) => {       
         return new Promise((resolve, reject) => {
             Menu.findAll({
                 where :{
@@ -32,19 +31,11 @@ module.exports = {
         })
     },
 
-    getUserMenus: (id) => {
-        return new Promise((resolve, reject) => {
-            MenuRFMenu.findAll({
-                where:{
-                    storeID:1,
-                    userID:id
-                }
-            }).then(menus => {
-                
-                resolve(menus)
-            }).catch(e => {
-                resolve(null)
-            });
-        })
+    createUser: (name, manufacturer, price) => {
+        return null;
     },
+
+    deleteUser: (id) => {
+        return null;
+    }
 };
