@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>个人健康信息调查</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/vue.js"></script>
+    <script>
+        $(function () {
+            var vm = new Vue({
+                el: '#vm',
+                data: {
+                    name: '',
+                    age: '',
+                    phone: '',
+                    province: '',
+                    city: '',
+                    area: '',
+                    address: '',
+                    isbloodpressureuk: '',
+                    bloodpressureuk: '',
+                    isbloodsugar: '',
+                    bloodsugar: '',
+                    isbloodclaw: '',
+                    bloodclaw: '',
+                    isrheumatoid: '',
+                    rheumatoid: '',
+                    otherhistory: '',
+                    subagree: true,
+                },
+                methods: {
+                    register: function () {
+                        $('#modal-data').text(JSON.stringify(this.$data, null, '    '));
+                        $('#modal').modal();
+                        // TODO: post JSON data to server...
+                    }
+                }
+            });
+            window.vm = vm;
+        });
+
+        function executeJs() {
+            try {
+                var code = $('#code').val();
+                var fn = new Function('var vm = window.vm;\n' + code);
+                fn();
+            } catch (e) { }
+            return false;
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="modal" id="modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Handle Register Form</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Post JSON data:</p>
+                    <pre id="modal-data"></pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="important" style="color:#cdbfe3; background-color:#6f5499; padding:30px 0; margin:-20px 0 20px 0;">
+        <div class="container">
+            <h1 style="color:#fff; font-size:60px;text-align: center;">健康信息调查</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-th-list"></span> 健康信息</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="vm">
+                            <form name="register" action="#" v-on:submit.prevent="register">
+                                <div class="form-group">
+                                    <label>姓名:</label>
+                                    <input type="text" v-model="name" class="form-control" placeholder="请输入您的姓名">
+                                </div>
+                                <div class="form-group">
+                                    <label>年龄:</label>
+                                    <input type="number" v-model="age" class="form-control" placeholder="请输入您的年龄">
+                                </div>
+                                <div class="form-group">
+                                    <label>电话:</label>
+                                    <input type="tel" v-model="phone" class="form-control" placeholder="请输入您的联系电话">
+                                </div>
+                                <div class="form-group">
+                                    <label>住址:</label>
+                                    <select v-model="province" class="form-control">
+                                        <option value="bj">Beijing</option>
+                                        <option value="sh">Shanghai</option>
+                                        <option value="gz">Guangzhou</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select v-model="city" class="form-control">
+                                        <option value="bj">Beijing</option>
+                                        <option value="sh">Shanghai</option>
+                                        <option value="gz">Guangzhou</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select v-model="area" class="form-control">
+                                        <option value="bj">Beijing</option>
+                                        <option value="sh">Shanghai</option>
+                                        <option value="gz">Guangzhou</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" v-model="name" class="form-control" placeholder="请输入您的具体地址,如街道门牌号">
+                                </div>
+                                <div class="form-group">
+                                    <label>血压:</label>
+                                    <div class="radio-inline">
+                                        <label><input type="radio" name="isbloodpressureuk" value="m"
+                                                v-model="isbloodpressureuk">
+                                            正常</label>
+                                    </div>
+                                    <div class="radio-inline">
+                                        <label><input type="radio" name="isbloodpressureuk" value="f"
+                                                v-model="isbloodpressureuk">
+                                            高血压</label>
+                                    </div>
+                                    <div class="radio-inline">
+                                        <label>数值:<input type="number" value="s" v-model="bloodpressureuk"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>血糖:</label>
+                                    <div class="radio-inline">
+                                        <label><input type="radio" name="isbloodsugar" value="m" v-model="isbloodsugar">
+                                            正常</label>
+                                    </div>
+                                    <div class="radio-inline">
+                                        <label><input type="radio" name="isbloodsugar" value="f" v-model="isbloodsugar">
+                                            高血糖</label>
+                                    </div>
+                                    <div class="radio-inline">
+                                        <label>数值:<input type="number" value="s" v-model="bloodsugar"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>血脂:</label>
+                                    <div class="radio-inline">
+                                        <label><input type="radio" name="isbloodclaw" value="m" v-model="isbloodclaw">
+                                            正常</label>
+                                    </div>
+                                    <div class="radio-inline">
+                                        <label><input type="radio" name="isbloodclaw" value="f" v-model="isbloodclaw">
+                                            高血脂</label>
+                                    </div>
+                                    <div class="radio-inline">
+                                        <label>数值:<input type="number" value="s" v-model="bloodclaw"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>类风湿:</label>
+                                    <div class="radio-inline">
+                                        <label><input type="radio" name="isrheumatoid" value="m" v-model="isrheumatoid">
+                                            无</label>
+                                    </div>
+                                    <div class="radio-inline">
+                                        <label><input type="radio" name="isrheumatoid" value="f" v-model="isrheumatoid">
+                                            有</label>
+                                    </div>
+                                    <div class="radio-inline">
+                                        <label>数值:<input type="number" value="s" v-model="rheumatoid"></label>
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <label>慢性病:</label>
+                                    <div>
+                                        <label class="checkbox-inline"><input type="checkbox" v-model="language"
+                                                value="zh"> 高血压</label>
+                                        <label class="checkbox-inline"><input type="checkbox" v-model="language"
+                                                value="en"> 高血糖</label>
+                                        <label class="checkbox-inline"><input type="checkbox" v-model="language"
+                                                value="fr"> 高血脂</label>
+                                        <label class="checkbox-inline"><input type="checkbox" v-model="language"
+                                                value="fr"> 类风湿</label>
+                                    </div>
+                                </div> -->
+
+                                <div class="form-group">
+                                    <label>其他疾病史:</label>
+                                    <textarea v-model="otherhistory" class="form-control" rows="3" style="resize: none;"
+                                        placeholder="如有其他病史，请在此填写..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>是否愿意:</label>
+                                    <div>
+                                        <label class="checkbox-inline"><input type="checkbox" v-model="subagree">
+                                            接受健康指导建议</label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background-color:#ddd; padding: 20px 0;">
+        <div class="container">
+            <p>浙江省杭州市健康体检中心 <a href="#">@2019</a>.</p>
+        </div>
+    </footer>
+</body>
+
+
+</html>

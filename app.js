@@ -29,6 +29,12 @@ app.use(rest.restify());
 app.use(bodyParser());
 app.use(controller());
 
+let staticFiles = require('./static-files');
+app.use(staticFiles('/static/', __dirname + '/static'));
+app.use(async (ctx, next) => {
+    ctx.response.redirect('/static/index.html');
+});
+
 app.listen(8080);
 
 console.log('app started at port 8080');
